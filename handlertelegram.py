@@ -1,4 +1,5 @@
 from telethon import TelegramClient, sync
+from telethon.tl.functions.messages import GetHistoryRequest
 
 class HandlerTelegram(object):
     
