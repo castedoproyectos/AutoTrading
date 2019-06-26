@@ -1,14 +1,13 @@
 from telethon import TelegramClient, events, sync
 
 client = TelegramClient('session_name',
-                    "9u5zp9",
-                    api_hash,
-                    update_workers=1,
-                    spawn_read_thread=False)
+                    "526632",
+                    "eeb7b94dc683848287857f8bfa03aa58")
+
 assert client.connect()
 if not client.is_user_authorized():
-    client.send_code_request(phone_number)
-    me = client.sign_in(phone_number, input('Enter code: '))
+    client.send_code_request("+34657648827")
+    me = client.sign_in("+34657648827", input('Enter code: '))
 
 channel_username='tehrandb' # your channel
 channel_entity=client.get_entity(channel_username)
