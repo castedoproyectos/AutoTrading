@@ -6,7 +6,8 @@ class Senial(object):
         self._real_senial = None
 
         self._id = None
-
+        self._id_mt4 = None
+        
         self._pair = None
         self._type = None
      
@@ -134,5 +135,5 @@ class Senial(object):
         pass
 
    
-    def load_attributes(self, line): 
-        
+    def load_attributes(self, line):
+        pass
