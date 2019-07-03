@@ -24,13 +24,10 @@ class TelegramHandler(object):
 
     def new_msn(self, list_msn):
 
-        new = False
-        for new_msn in list_msn:
-            if new_msn not in self._list_msn and not new:
-                new = True
+        while len(list_msn) > 0: 
+            if list_msn[0] in self._list_msn:
+                list_msn.pop(0)        
             else:
-
-            if nuevo:
                 break
         
         return list_msn
