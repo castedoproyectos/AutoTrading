@@ -21,7 +21,7 @@ class TelegramHandler(object):
         self._channel_entity = self._client.get_entity('https://t.me/joinchat/LbVznBRH92k0YavhYueMFg')
 
 
-    def new_msn(self, list_msn):
+    def is_new_msn(self, list_msn):
         """Realizael filtro de los mensajes para poder identificar cuales de 
         ellos son nuevos para el sistema.
         
@@ -74,6 +74,9 @@ class TelegramHandler(object):
             num_msn {[int]} -- Número de mensajes a coger en cada iteración
             q {[queue]} -- Cola de mensajes donde situarlos
         """
-        msn = self.get_msn(num_msn)
-        new_msn = self.new_msn(msn)
-        q.put(new_msn)
+        while True:
+            msn = self.get_msn(num_msn)
+            new_msn = self.is_new_msn(msn)
+            q.put(new_msn)
+
+            time.sleep(5)
