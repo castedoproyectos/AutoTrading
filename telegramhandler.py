@@ -1,7 +1,7 @@
 from telethon import TelegramClient, events, sync
 from telethon.tl.functions.messages import GetHistoryRequest
 
-import time
+import time, queue
 
 class TelegramHandler(object):
 

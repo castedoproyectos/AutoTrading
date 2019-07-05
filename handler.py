@@ -1,4 +1,5 @@
 from senial import Senial
+import queue
 
 class Handler(object):
 
@@ -159,21 +160,5 @@ class Handler(object):
                 return it
         
         return None
-                
-
-    def create_senial_mt4(self, Senial):
-        pass
         
-
-    def main_loop(self, msn):
-
-        senial_convert = self.convert_msn_to_senial(msn)
-        if senial_convert is not None:
-            pos = self.is_new_senial(senial_convert)
-            if pos is None:
-                self._total_senials.append(senial_convert)
-                # TODO Mandar mensaje a el mt4
-            else:
-                self._total_senials[pos].set_new_text(senial_convert._text)
-
 

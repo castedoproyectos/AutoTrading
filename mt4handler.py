@@ -6,19 +6,27 @@ class Mt4Handler(object):
     def __init__(self):
         self._conn = DWX_ZeroMQ_Connector()
 
-    '_action': 'OPEN',
-                  '_type': 0,
-                  '_symbol': 'EURUSD',
-                  '_price': 0.0,
-                  '_SL': 500, # SL/TP in POINTS, not pips.
-                  '_TP': 500,
-                  '_comment': 'DWX_Python_to_MT',
-                  '_lots': 0.01,
-                  '_magic': 123456,
-                  '_ticket': 0})
+    def convert_senial_to_trade(self, s):
+              
+        _my_trade = self._conn._generate_default_order_dict()
+
+        # Determinar tipo
+        if s._type is "BUY":
+            _my_trade['type'] = 0
+        elif s._type is "SELL":
+            _my_trade['type'] = 1
+
+        _my_trade['_symbol'] = s._pair
+        _my_trade['_price'] = 0.0
+        _my_trade['_SL'] = s.get_points("SL")
+        _my_trade['_TP'] = s.get_points("TP1")
+        _my_trade['_comment'] = "AutoTrading-Python"
+        _my_trade['_lots'] = 0.01
+        _my_trade['_magic'] = 123456
+        _my_trade['_ticket'] = s._id_mt4
+                  
 
     def new_operation(self, senial):
-
 
         self._conn._DWX_MTX_NEW_TRADE_()
 
