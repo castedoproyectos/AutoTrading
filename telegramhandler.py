@@ -43,7 +43,7 @@ class TelegramHandler(object):
         
         self._list_msn.extend(list_msn)
         
-        tprint(" Telegram - Nuevos mensajes: " + str(len(list_msn)))
+        tprint("Telegram - Nuevos mensajes: " + str(len(list_msn)))
         return list_msn
 
 
@@ -80,4 +80,5 @@ class TelegramHandler(object):
         f = open("demo_msn.txt", "w")
         f.close()
 
+        tprint("Telegram - Mensajes leidos: " + str(len(rows)))
         return rows

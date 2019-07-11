@@ -1,5 +1,4 @@
 from senial import Senial
-import queue
 
 class Handler(object):
 
@@ -159,6 +158,8 @@ class Handler(object):
         for it in range(len(self._total_senials)-1):
             if self._total_senials[it]._id is s._id:
                 return it
+
+        s._action.append("open")
         
         return None
         

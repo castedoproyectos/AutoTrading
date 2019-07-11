@@ -24,22 +24,32 @@ def func2(qt, qm):
     hd = Handler()
     tprint("Inicializado el manejador de mensajes")
 
-    while not qt.empty():
-        msn = qt.get()       
-        senial_convert = hd.convert_msn_to_senial(msn)
-        if senial_convert is not None:
-            pos = hd.is_new_senial(senial_convert)
-            if pos is None:
-                hd._total_senials.append(senial_convert)
-                qm.put(senial_convert)
-            else:
-                hd._total_senials[pos].set_new_text(senial_convert._text)
+    while True:
 
+        if qt.qsize() > 0:
+            msn = qt.get()
+            tprint("Handler - Nuevo mensaje")
+                
+            senial_convert = hd.convert_msn_to_senial(msn)
+            if senial_convert is not None:
+                tprint("Handler - El mensaje es una senial")
+                pos = hd.is_new_senial(senial_convert)
+                if pos is None:
+                    tprint("Handler - La senial es nueva")
+                    hd._total_senials.append(senial_convert)
+                    qm.put(senial_convert)
+                else:
+                    tprint("Handler - La senial es antigua")
+                    hd._total_senials[pos].set_new_text(senial_convert._text)
+
+        else:
+            tprint("Handler - Ningún mensaje")
+            time.sleep(2)
 
 def func3(qm):
     hmt4 = Mt4Handler()
     tprint("inicializado el mt4")
-    
+
     while not qm.empty():
         sen = qm.get()
         _trade = hmt4.convert_senial_to_trade(sen)
