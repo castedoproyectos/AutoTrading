@@ -1,5 +1,6 @@
 from telethon import TelegramClient, events, sync
 from telethon.tl.functions.messages import GetHistoryRequest
+from aux_function import tprint
 
 import time, queue
 
@@ -12,6 +13,7 @@ class TelegramHandler(object):
         self._hash_id = "526632"
         self._hash_num = "eeb7b94dc683848287857f8bfa03aa58"
 
+        """ 
         self._client = TelegramClient(self._sesion_name,
                                 self._hash_id,
                                 self._hash_num)
@@ -19,7 +21,7 @@ class TelegramHandler(object):
         self._client.start()
 
         self._channel_entity = self._client.get_entity('https://t.me/joinchat/LbVznBRH92k0YavhYueMFg')
-
+        """
 
     def is_new_msn(self, list_msn):
         """Realizael filtro de los mensajes para poder identificar cuales de 
@@ -31,6 +33,8 @@ class TelegramHandler(object):
         Returns:
             {[list]} -- Devuelve la lista de mensajes ya filtrada y sin los repetidos.
         """
+        size = len(list_msn)
+
         while len(list_msn) > 0: 
             if list_msn[0] in self._list_msn:
                 list_msn.pop(0)        
@@ -38,6 +42,8 @@ class TelegramHandler(object):
                 break
         
         self._list_msn.extend(list_msn)
+        
+        tprint(" Telegram - Nuevos mensajes: " + str(len(list_msn)))
         return list_msn
 
 
@@ -65,18 +71,13 @@ class TelegramHandler(object):
         # TODO Ordenarlo al contrario. 0 -> n-1
         return list(posts.messages[:].message)
         
-        
-    def main_loop(self, num_msn, q):
-        """Bucle de ejecución principal donde se adquieren los mensajes,
-        se filtran para identificar los buenos y se colocan en una cola.
-        
-        Arguments:
-            num_msn {[int]} -- Número de mensajes a coger en cada iteración
-            q {[queue]} -- Cola de mensajes donde situarlos
-        """
-        while True:
-            msn = self.get_msn(num_msn)
-            new_msn = self.is_new_msn(msn)
-            q.put(new_msn)
 
-            time.sleep(5)
+    def get_msn_demo(self, num_msn):
+        f = open("demo_msn.txt")
+        rows = f.readlines()
+        f.close()
+
+        f = open("demo_msn.txt", "w")
+        f.close()
+
+        return rows

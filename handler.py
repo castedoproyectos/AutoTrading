@@ -18,11 +18,12 @@ class Handler(object):
         f = open("open_senial.txt")
         rows = f.readlines()
 
-        s = Senial()
-        for row in rows:
-            s.load_attributes(row)
-            self._open_senials.append(s)
-        
+        if len(rows) > 0:
+            s = Senial()
+            for row in rows:
+                s.load_attributes(row)
+                self._open_senials.append(s)
+            
         f.close()
 
         # Print

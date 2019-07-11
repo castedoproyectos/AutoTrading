@@ -14,6 +14,7 @@ class Senial(object):
         self._tp = list()
         self._sl = dict()
 
+        self._action = list()
         self._text = list()
 
         if dict_attr is not None:

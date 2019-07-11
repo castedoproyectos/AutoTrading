@@ -24,9 +24,19 @@ class Mt4Handler(object):
         _my_trade['_lots'] = 0.01
         _my_trade['_magic'] = 123456
         _my_trade['_ticket'] = s._id_mt4
+
+        return _my_trade
                   
 
-    def new_operation(self, senial):
+    def open_operation(self, trade):
+        try:
+            self._conn._DWX_MTX_NEW_TRADE_(trade)
+        except:
+            print("Error en el apertura de la orden")
 
-        self._conn._DWX_MTX_NEW_TRADE_()
 
+    def close_operation(self, trade):
+        self._conn._DWX_MTX_CLOSE_TRADE_BY_TICKET_()
+
+    def send_action(self, senial):
+        pass
